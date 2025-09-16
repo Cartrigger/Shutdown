@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://github.com/Cartrigger/Shutdown/issues"
+
+[[mods]]
+modId="shutdown"
+version="${file.jarVersion}"
+displayName="Shutdown Mod"
+description='''
+A Minecraft mod that provides system interaction commands including shutdown, file deletion, and directory listing.
+'''
+authors="Cartrigger"
+displayURL="https://github.com/Cartrigger/Shutdown"
+
+[[dependencies.shutdown]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.shutdown]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"

@@ -1,0 +1,77 @@
+plugins {
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'maven-publish'
+}
+
+repositories {
+    maven {
+        name = 'MinecraftForge'
+        url = 'https://maven.minecraftforge.net'
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${rootProject.forge_version}"
+}
+
+minecraft {
+    mappings channel: 'official', version: rootProject.minecraft_version
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                shutdown {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                shutdown {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": project.version
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "shutdown",
+                "Specification-Vendor"   : "cartrigger",
+                "Specification-Version"  : "1",
+                "Implementation-Title"   : project.name,
+                "Implementation-Version" : project.version,
+                "Implementation-Vendor"  : "cartrigger",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+        }
+    }
+
+    repositories {
+        // Add repositories to publish to here.
+    }
+}
