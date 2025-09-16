@@ -1,5 +1,6 @@
 package com.cartrigger.shutdown.commands;
 
+import com.cartrigger.shutdown.neoforge.ShutdownModNeoForge;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
@@ -7,7 +8,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import com.cartrigger.shutdown.ShutdownMod;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -88,11 +88,11 @@ public class ListPathCommand {
             source.sendSuccess(() -> Component.literal(""), false);
             source.sendSuccess(() -> Component.literal("§6=== End of listing ==="), false);
             
-            ShutdownMod.LOGGER.info("Directory listed: " + directoryPath + " by " + source.getTextName());
+            ShutdownModNeoForge.LOGGER.info("Directory listed: " + directoryPath + " by " + source.getTextName());
             
         } catch (Exception e) {
             source.sendFailure(Component.literal("Failed to list directory: " + e.getMessage()));
-            ShutdownMod.LOGGER.error("Error listing directory: " + directoryPath + " - " + e.getMessage());
+            ShutdownModNeoForge.LOGGER.error("Error listing directory: " + directoryPath + " - " + e.getMessage());
             return 0;
         }
         

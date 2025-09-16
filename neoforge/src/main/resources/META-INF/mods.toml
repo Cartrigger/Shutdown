@@ -26,10 +26,3 @@ mandatory=true
 versionRange="[1.20.1,1.21)"
 ordering="NONE"
 side="BOTH"
-
-[[dependencies.shutdown]]
-modId="architectury"
-mandatory=true
-versionRange="[9.2.14,)"
-ordering="AFTER"
-side="BOTH"
