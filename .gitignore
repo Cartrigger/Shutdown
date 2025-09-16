@@ -1,0 +1,32 @@
+# Gradle
+.gradle/
+build/
+out/
+*/build/
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.project
+.classpath
+.settings/
+.metadata/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Minecraft
+run/
+logs/
+crash-reports/
+
+# Loom
+.cache/
+remappedSrc/
+
+# Architectury
+.architectury-transformer/
