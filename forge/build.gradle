@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${rootProject.forge_version}"
+    implementation project(':common')
 }
 
 minecraft {

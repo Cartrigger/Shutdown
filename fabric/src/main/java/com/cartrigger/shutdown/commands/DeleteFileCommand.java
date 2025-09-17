@@ -38,7 +38,7 @@ public class DeleteFileCommand {
             
             // Security check - prevent deletion of critical system files
             String absolutePath = file.getAbsolutePath().toLowerCase();
-            if (isCriticalPath(absolutePath)) {
+            if (FileUtil.isCriticalPath(absolutePath)) {
                 source.sendError(Text.literal("Cannot delete critical system files or directories"));
                 ShutdownModFabric.LOGGER.warn("Attempted to delete critical path: " + absolutePath + " by " + source.getName());
                 return 0;
@@ -46,7 +46,7 @@ public class DeleteFileCommand {
             
             if (file.isDirectory()) {
                 // Delete directory and all contents
-                deleteDirectory(file);
+                FileUtil.deleteDirectory(file);
                 source.sendFeedback(() -> Text.literal("Successfully deleted directory: " + filePath), true);
             } else {
                 // Delete single file
@@ -63,36 +63,5 @@ public class DeleteFileCommand {
         }
         
         return 1;
-    }
-    
-    private static boolean isCriticalPath(String path) {
-        // List of critical paths that should not be deleted
-        String[] criticalPaths = {
-            "/windows", "/system32", "/boot", "/etc", "/usr", "/bin", "/sbin",
-            "/lib", "/lib64", "/var", "/proc", "/sys", "/dev", "/root",
-            "c:\\windows", "c:\\system32", "c:\\boot", "c:\\program files",
-            "/applications", "/library", "/system"
-        };
-        
-        for (String critical : criticalPaths) {
-            if (path.startsWith(critical)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    private static void deleteDirectory(File directory) throws Exception {
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-                if (file.isDirectory()) {
-                    deleteDirectory(file);
-                } else {
-                    Files.delete(file.toPath());
-                }
-            }
-        }
-        Files.delete(directory.toPath());
     }
 }

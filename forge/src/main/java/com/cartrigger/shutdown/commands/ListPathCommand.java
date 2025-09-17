@@ -68,7 +68,7 @@ public class ListPathCommand {
                 try {
                     String name = file.getName();
                     String type = file.isDirectory() ? "§9[DIR]" : "§f[FILE]";
-                    String size = file.isDirectory() ? "" : " (" + formatFileSize(file.length()) + ")";
+                    String size = file.isDirectory() ? "" : " (" + FileUtil.formatFileSize(file.length()) + ")";
                     String lastModified = dateFormat.format(new Date(file.lastModified()));
                     
                     String permissions = "";
@@ -97,12 +97,5 @@ public class ListPathCommand {
         }
         
         return 1;
-    }
-    
-    private static String formatFileSize(long bytes) {
-        if (bytes < 1024) return bytes + " B";
-        if (bytes < 1024 * 1024) return String.format("%.1f KB", bytes / 1024.0);
-        if (bytes < 1024 * 1024 * 1024) return String.format("%.1f MB", bytes / (1024.0 * 1024.0));
-        return String.format("%.1f GB", bytes / (1024.0 * 1024.0 * 1024.0));
     }
 }
