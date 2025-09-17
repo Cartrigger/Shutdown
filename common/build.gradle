@@ -1,0 +1,10 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    // No platform-specific dependencies
+    // This module contains only shared logic
+}
+
+// Base module - no platform-specific code
